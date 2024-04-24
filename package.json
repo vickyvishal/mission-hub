@@ -1,0 +1,13 @@
+{
+  "name": "mission-hub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "pnpm --filter \"client\" run dev",
+    "server": "pnpm --filter \"server\" run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
