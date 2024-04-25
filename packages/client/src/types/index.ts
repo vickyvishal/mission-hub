@@ -12,6 +12,8 @@ export interface Mission {
   progress_percentage: number;
   recent_update: string;
   countries: string[];
+  organizations: string[];
+  image_src: string;
 }
 
 export interface Spacecraft {
@@ -26,3 +28,5 @@ export interface Spacecraft {
     navigation_system: string;
   };
 }
+
+export type Status = "idle" | "loading" | "error";

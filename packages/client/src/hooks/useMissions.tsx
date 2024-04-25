@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { Mission } from "../types";
-
-export type Status = "idle" | "loading" | "error";
+import { Mission, Status } from "../types";
 
 export default function useMissions() {
   const [missions, setMissions] = useState<Mission[]>([]);
@@ -9,13 +7,26 @@ export default function useMissions() {
 
   useEffect(() => {
     setStatus("loading");
-    fetch("http://localhost:3000/api/missions")
-      .then((response) => response.json())
-      .then((data) => {
+    const cache = sessionStorage.getItem("missions");
+    if (cache) {
+      setMissions(JSON.parse(cache));
+      setStatus("idle");
+      return;
+    }
+
+    const fetchMissions = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/missions");
+        const data = await response.json();
         setMissions(data);
         setStatus("idle");
-      })
-      .catch(() => setStatus("error"));
+        sessionStorage.setItem("missions", JSON.stringify(data));
+      } catch (error) {
+        setStatus("error");
+      }
+    };
+
+    fetchMissions();
   }, []);
   return { missions, status };
 }

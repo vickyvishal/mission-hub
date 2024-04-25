@@ -1,68 +1,130 @@
-import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { Mission } from "../../types";
 import { faFlagUsa } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import tileImg from "../../assets/nasa_blue.png";
+import { hasFlag } from "country-flag-icons";
+import Flag from "react-flagkit";
 
-interface TileProps {
-  mission: Mission;
-}
+const statusColor: { [key: string]: string } = {
+  Completed: "green",
+  Inactive: "red",
+  UnderContruction: "orange",
+  retired: "gray",
+};
 
 const StyledTile = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid black;
   margin-bottom: 1rem;
   width: 300px;
+  background-color: #fff;
+  cursor: pointer;
 `;
 
 const TileHeader = styled.div`
   display: flex;
-  align-items: center;
+  height: 8rem;
   gap: 0.5rem;
-  justify-content: flex-start;
 `;
 
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 0.5rem;
-  background-color: #ccc;
-  border-radius: 4px;
-`;
-
-const Progress = styled.div<{ progress: number }>`
-  width: ${(props) => props.progress}%;
+const Title = styled.h3`
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: blue;
   height: 100%;
-  background-color: #007bff;
-  border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
-const ProgressText = styled.div`
+const TileImg = styled.img`
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+`;
+
+const FlagContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const KeyInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  border-top: 2px solid black;
+  margin-top: 0.5rem;
 `;
 
-export default function Tile(mission: Mission) {
-  const { name, description, progress_percentage } = mission;
+const DateInfo = styled.div`
+  flex-grow: 4;
+  border-right: 2px solid black;
+
+  & div {
+    &:first-child {
+      color: #007bff;
+      font-weight: bold;
+    }
+    text-align: start;
+  }
+`;
+
+const StatusInfo = styled.div`
+  flex-grow: 1;
+  padding-left: 0.5rem;
+  & div {
+    &:first-child {
+      color: #007bff;
+      font-weight: bold;
+    }
+    text-align: start;
+  }
+`;
+
+export interface TileProps {
+  mission: Mission;
+  onClick: (mission: Mission) => void;
+}
+
+export default function Tile({ mission, onClick }: TileProps) {
+  const {
+    name,
+    description,
+    progress_percentage,
+    countries,
+    status,
+    launch_date,
+    spacecraft,
+  } = mission;
   console.log(mission);
   return (
-    <StyledTile>
+    <StyledTile onClick={() => {}}>
       <TileHeader>
-        <FontAwesomeIcon icon={faFlagUsa} />
-        <h3>{name}</h3>
+        <TileImg
+          src={mission.image_src ? mission.image_src : tileImg}
+          alt="tile"
+        />
+        <Title>{name}</Title>
       </TileHeader>
-      <i>{description}</i>
 
-      <ProgressText>
-        <span>Progress</span>
-        {progress_percentage}%
-      </ProgressText>
-      <ProgressBar>
-        <Progress progress={progress_percentage} />
-      </ProgressBar>
+      <FlagContainer>
+        {countries.map((country) => (
+          <Flag key={country} country={country} />
+        ))}
+      </FlagContainer>
+
+      <KeyInfoContainer>
+        <DateInfo>
+          <div>Launched On</div>
+          <div>{launch_date.split("-")[0]}</div>
+        </DateInfo>
+        <StatusInfo>
+          <div>Progress</div>
+          <div>{progress_percentage}%</div>
+        </StatusInfo>
+      </KeyInfoContainer>
     </StyledTile>
   );
 }
