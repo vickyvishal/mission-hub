@@ -7,11 +7,7 @@ type ContentLayoutProps = {
   title: string;
 };
 
-const HeaderBackground = styled.div`
-  position: relative;
-  padding: 10px;
-  color: white;
-`;
+const HeaderBackground = styled.div``;
 
 const HeaderTitle = styled.h3`
   position: absolute;
@@ -30,6 +26,7 @@ const HeaderImage = styled.img`
 
 const StyledContentLayout = styled.div`
   min-height: 100vh;
+  padding: 2rem;
   background-size: 15px 15px;
   background-image: linear-gradient(
       to right,
@@ -46,10 +43,6 @@ const Content = styled.div`
 export default function ContentLayout({ children, title }: ContentLayoutProps) {
   return (
     <StyledContentLayout>
-      <HeaderBackground>
-        <HeaderImage src={background} />
-        <HeaderTitle>{title}</HeaderTitle>
-      </HeaderBackground>
       <Content>{children}</Content>
     </StyledContentLayout>
   );

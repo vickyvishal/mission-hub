@@ -26,7 +26,9 @@ export default function useMissions() {
       }
     };
 
-    fetchMissions();
+    setTimeout(() => {
+      fetchMissions();
+    }, 3000);
   }, []);
   return { missions, status };
 }

@@ -8,9 +8,9 @@ export default function useFilter({
   filterBy: any[];
 }) {
   const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [searchTerm, statusFilter] = filterBy;
 
   useEffect(() => {
-    const [searchTerm, statusFilter] = filterBy;
     const filteredData = data.filter((mission) => {
       const nameMatch = mission.name
         .toLowerCase()
@@ -20,7 +20,7 @@ export default function useFilter({
       return nameMatch && statusMatch;
     });
     setFilteredData(filteredData);
-  }, [data, filterBy[0], filterBy[1]]);
+  }, [data, searchTerm, statusFilter]);
 
   return [filteredData];
 }

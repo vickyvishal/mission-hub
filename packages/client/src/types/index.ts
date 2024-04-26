@@ -14,19 +14,37 @@ export interface Mission {
   countries: string[];
   organizations: string[];
   image_src: string;
+  spacecraft_image_src: string;
 }
 
 export interface Spacecraft {
-  name: string;
-  fuel_levels: string;
-  engine_readiness: string;
-  communication_antenna: string;
-  critical_systems: {
-    power_system: string;
-    propulsion_system: string;
-    thermal_control_system: string;
-    navigation_system: string;
+  spacecraft_name: string;
+  manufacturer: string;
+  mission_type: string;
+  launch_date: string;
+  destination: string;
+  crew_capacity: number;
+  payload_capacity_kg: number;
+  propulsion_system: {
+    type: string;
+    engine_count: number;
+    thrust: string;
   };
+  communication_system: {
+    type: string;
+    frequency_band: string;
+    range: string;
+  };
+  power_source: {
+    type: string;
+    output: string;
+  };
+  dimensions: {
+    length_meters: number;
+    diameter_meters: number;
+    weight_kg: number;
+  };
+  status: string;
 }
 
 export type Status = "idle" | "loading" | "error";

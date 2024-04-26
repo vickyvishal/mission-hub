@@ -24,7 +24,7 @@ const TileHeader = styled.div`
 
 const StyledInput = styled.input`
   padding: 1rem;
-  width: 30%;
+  width: 300px;
   border: 2px solid black;
   &:focus-visible {
     outline: none;
@@ -41,6 +41,7 @@ const StyledFilter = styled.div`
   }
   select {
     padding: 0.5rem;
+    height: 100%;
     border: 2px solid black;
     &:focus-visible {
       outline: none;
@@ -88,7 +89,6 @@ export default function Listing({
           }
         />
         <StyledFilter>
-          <label htmlFor="status-filter">Status</label>
           <select
             id="status-filter"
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>

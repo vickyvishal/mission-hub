@@ -100,7 +100,7 @@ export default function Tile({ mission, onClick }: TileProps) {
   } = mission;
   console.log(mission);
   return (
-    <StyledTile onClick={() => {}}>
+    <StyledTile onClick={() => onClick(mission)}>
       <TileHeader>
         <TileImg
           src={mission.image_src ? mission.image_src : tileImg}
