@@ -1,10 +1,13 @@
-import Tile from "../component/tile/Tile";
-import ContentLayout from "../component/layout/ContentLayout";
+import Tile from "../components/tile/Tile";
+import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
 import { Mission, Status } from "../types";
 import { useNavigate } from "react-router-dom";
 import { ReactEventHandler, useState } from "react";
 import useFilter from "../hooks/useFilter";
+import PrimaryButton from "../components/button/PrimaryButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 const TileWrapper = styled.div`
   display: flex;
@@ -17,6 +20,7 @@ const TileWrapper = styled.div`
 
 const TileHeader = styled.div`
   display: flex;
+  justify-content: space-between;
   margin: 1rem;
   gap: 1rem;
   width: 100%;
@@ -31,7 +35,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledFilter = styled.div`
+const StyledSelect = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -47,6 +51,11 @@ const StyledFilter = styled.div`
       outline: none;
     }
   }
+`;
+
+const StyledFilter = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
 
 export default function Listing({
@@ -80,29 +89,36 @@ export default function Listing({
   return (
     <ContentLayout title="Missions">
       <TileHeader>
-        <StyledInput
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchTerm(e.target.value)
-          }
-        />
         <StyledFilter>
-          <select
-            id="status-filter"
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setStatusFilter(e.target.value as Status)
+          <StyledInput
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchTerm(e.target.value)
             }
-            value={statusFilter}
-          >
-            <option value="all">All</option>
-            <option value="Completed">Completed</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">In Active</option>
-            <option value="Under construction">Under construction</option>
-          </select>
+          />
+          <StyledSelect>
+            <select
+              id="status-filter"
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                setStatusFilter(e.target.value as Status)
+              }
+              value={statusFilter}
+            >
+              <option value="all">All</option>
+              <option value="Completed">Completed</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">In Active</option>
+              <option value="Under construction">Under construction</option>
+            </select>
+          </StyledSelect>
         </StyledFilter>
+        <PrimaryButton
+          title="Simulation"
+          onClick={() => navigate("/simulator")}
+          icon={<FontAwesomeIcon icon={faRocket} />}
+        />
       </TileHeader>
       <TileWrapper>
         {filteredMissions.map((mission) => (

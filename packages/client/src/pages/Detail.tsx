@@ -1,9 +1,9 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Mission } from "../types";
-import ContentLayout from "../component/layout/ContentLayout";
+import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
-import CatalogueSurface from "../component/surface/CatalogueSurface";
-import SpaceCraftDiagram from "../component/surface/SpaceCraftDiagram";
+import CatalogueSurface from "../components/surface/CatalogueSurface";
+import SpaceCraftDiagram from "../components/surface/SpaceCraftDiagram";
 
 const DetailHeader = styled.div`
   display: flex;

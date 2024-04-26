@@ -1,4 +1,4 @@
-import ContentLayout from "../component/layout/ContentLayout";
+import ContentLayout from "../components/layout/ContentLayout";
 
 import styled from "styled-components";
 import SimulaterOverview from "../features/simulator/SimulaterOverview";

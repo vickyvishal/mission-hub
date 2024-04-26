@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LongCards from "../../component/tile/LongCards";
+import LongCards from "../../components/tile/LongCards";
 import spaceCraftData from "./data/simulator.json";
 
 const StyledSimulatorCheckList = styled.div`

@@ -3,7 +3,7 @@ import { Spacecraft } from "../../types";
 import spaceCraftData from "./data/simulator.json";
 
 import styled from "styled-components";
-import Card from "../../component/tile/Card";
+import Card from "../../components/tile/Card";
 
 const StyledSimulaterOverview = styled.div`
   display: flex;
