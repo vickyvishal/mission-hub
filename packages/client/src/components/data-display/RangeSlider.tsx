@@ -2,9 +2,9 @@ import React from "react";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faLock } from "@fortawesome/free-solid-svg-icons";
 
-const StyledLongCards = styled.div`
+const StyledRangeSlider = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -13,7 +13,7 @@ const StyledLongCards = styled.div`
   background-color: #ededed;
   border: 2px solid gray;
   height: 100px;
-  width: 300px;
+  width: 350px;
   font-weight: bold;
 `;
 
@@ -59,7 +59,8 @@ const InteractivePanel = styled.div`
   flex-grow: 2;
 `;
 
-export default function LongCards({
+export default function RangeSlider({
+  //better name for this component would be RangeSlider
   maxRange,
   minRange,
   availableValue,
@@ -73,38 +74,48 @@ export default function LongCards({
   unit?: string;
 }) {
   const [rangeValue, setRangeValue] = React.useState(requiredValue);
+  const [isSet, setIsSet] = React.useState(false);
   return (
-    <StyledLongCards>
+    <StyledRangeSlider>
       <InteractivePanel>
-        <RequiredValue>
-          {rangeValue} {unit ?? null}
-        </RequiredValue>
+        <RequiredValue>{rangeValue}</RequiredValue>
         <div>
           <input
             type="range"
             min={minRange}
             max={availableValue}
             value={rangeValue}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setRangeValue(Number(e.target.value));
-            }}
+            onChange={
+              !isSet
+                ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                    setRangeValue(Number(e.target.value));
+                  }
+                : undefined
+            }
           ></input>
         </div>
 
         <AuthoriseButton
+          onClick={() => {
+            setIsSet((val) => !val);
+          }}
           color={
             requiredValue > rangeValue || requiredValue > availableValue
               ? "orange"
               : "green"
           }
         >
-          <FontAwesomeIcon icon={faCheck} />
+          <FontAwesomeIcon icon={isSet ? faLock : faCheck} />
         </AuthoriseButton>
       </InteractivePanel>
       <InfoPanel>
-        <p>Required: {requiredValue}</p>
-        <p>Available: {availableValue}</p>
+        <p>
+          Required: {requiredValue} <span>{unit}</span>
+        </p>
+        <p>
+          Available: {availableValue} <span>{unit}</span>
+        </p>
       </InfoPanel>
-    </StyledLongCards>
+    </StyledRangeSlider>
   );
 }

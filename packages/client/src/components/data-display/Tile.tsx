@@ -1,17 +1,7 @@
 import styled from "styled-components";
 import { Mission } from "../../types";
-import { faFlagUsa } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import tileImg from "../../assets/nasa_blue.png";
-import { hasFlag } from "country-flag-icons";
 import Flag from "react-flagkit";
-
-const statusColor: { [key: string]: string } = {
-  Completed: "green",
-  Inactive: "red",
-  UnderContruction: "orange",
-  retired: "gray",
-};
 
 const StyledTile = styled.div`
   display: flex;
@@ -22,6 +12,13 @@ const StyledTile = styled.div`
   width: 300px;
   background-color: #fff;
   cursor: pointer;
+  transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const TileHeader = styled.div`
@@ -38,6 +35,7 @@ const Title = styled.h3`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 `;
 
 const TileImg = styled.img`
@@ -86,21 +84,19 @@ const StatusInfo = styled.div`
 export interface TileProps {
   mission: Mission;
   onClick: (mission: Mission) => void;
+  tabIndex: number;
 }
 
-export default function Tile({ mission, onClick }: TileProps) {
-  const {
-    name,
-    description,
-    progress_percentage,
-    countries,
-    status,
-    launch_date,
-    spacecraft,
-  } = mission;
-  console.log(mission);
+export default function Tile({ mission, onClick, tabIndex }: TileProps) {
+  const { name, progress_percentage, countries, launch_date } = mission;
   return (
-    <StyledTile onClick={() => onClick(mission)}>
+    <StyledTile
+      onClick={() => onClick(mission)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") onClick(mission);
+      }}
+      tabIndex={tabIndex}
+    >
       <TileHeader>
         <TileImg
           src={mission.image_src ? mission.image_src : tileImg}

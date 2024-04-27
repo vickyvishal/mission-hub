@@ -9,9 +9,7 @@ const StyledCatlogueSurface = styled.div`
 const CatalogueTable = styled.table`
   border-collapse: collapse;
   background-color: #fff;
-
-  width: 300px;
-  overflow: hidden;
+  width: 100%;
   & th {
     border: 2px solid black;
   }

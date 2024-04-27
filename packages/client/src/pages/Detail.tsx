@@ -3,7 +3,7 @@ import { Mission } from "../types";
 import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
 import CatalogueSurface from "../components/surface/CatalogueSurface";
-import SpaceCraftDiagram from "../components/surface/SpaceCraftDiagram";
+import SpaceCraft from "../components/surface/SpaceCraft";
 
 const DetailHeader = styled.div`
   display: flex;
@@ -32,6 +32,7 @@ const MissionImg = styled.img`
 
 const DetailBody = styled.div`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 1rem;
   & div {
@@ -82,7 +83,10 @@ export default function Detail({ missions }: { missions: Mission[] }) {
 
       <DetailBody>
         <CatalogueSurface mission={mission} />
-        <SpaceCraftDiagram src={mission.spacecraft_image_src} />
+        <SpaceCraft
+          src={mission.spacecraft_image_src}
+          title={mission.spacecraft}
+        />
       </DetailBody>
     </ContentLayout>
   );

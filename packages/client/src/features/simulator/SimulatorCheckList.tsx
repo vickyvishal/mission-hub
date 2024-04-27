@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LongCards from "../../components/tile/LongCards";
+import RangeSlider from "../../components/data-display/RangeSlider";
 import spaceCraftData from "./data/simulator.json";
 
 const StyledSimulatorCheckList = styled.div`
@@ -44,44 +44,43 @@ const createRandomCheckListData = () => {
       type: "Solar",
       output: {
         value: power_source_output,
-        unit: "W",
+        unit: "KW",
       },
     },
   };
 };
 
-export default function SimulatorCheckList({
-  handleAutorization,
-}: {
-  handleAutorization: () => void;
-}) {
+export default function SimulatorCheckList() {
   const { propulsion_system, communication_system, power_source } =
     createRandomCheckListData();
 
   return (
     <StyledSimulatorCheckList>
       <SimulatorGroup>
-        <LongCards
+        <RangeSlider
           requiredValue={propulsion_system.thrust.value}
           availableValue={spaceCraftData.propulsion_system.thrust.value}
           maxRange={300}
           minRange={150}
+          unit={propulsion_system.thrust.unit}
         />
       </SimulatorGroup>
       <SimulatorGroup>
-        <LongCards
+        <RangeSlider
           requiredValue={communication_system.range.value}
           availableValue={spaceCraftData.communication_system.range.value}
           maxRange={12}
           minRange={7}
+          unit={communication_system.range.unit}
         />
       </SimulatorGroup>
       <SimulatorGroup>
-        <LongCards
+        <RangeSlider
           requiredValue={power_source.output.value}
           availableValue={spaceCraftData.power_source.output.value}
           maxRange={700}
           minRange={350}
+          unit={power_source.output.unit}
         />
       </SimulatorGroup>
       <strong>Space Craft Vitals</strong>

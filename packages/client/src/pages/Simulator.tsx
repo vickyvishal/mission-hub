@@ -5,6 +5,7 @@ import SimulaterOverview from "../features/simulator/SimulaterOverview";
 import SimulatorCheckList from "../features/simulator/SimulatorCheckList";
 import SimulatorTimer from "../features/simulator/SimulatorTimer";
 import { useState } from "react";
+import PrimaryButton from "../components/button/PrimaryButton";
 
 const StyledSimulator = styled.div`
   display: flex;
@@ -12,14 +13,7 @@ const StyledSimulator = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-`;
-
-const AuthorizationBtn = styled.button`
-  width: 200px;
-  margin: 20px auto;
-  text-align: center;
-  background-color: #4caf50;
-  color: white;
+  margin: 1rem;
 `;
 
 export default function Simulator() {
@@ -34,11 +28,9 @@ export default function Simulator() {
         <>
           <StyledSimulator>
             <SimulaterOverview />
-            <SimulatorCheckList handleAutorization={launchSpaceCraft} />
+            <SimulatorCheckList />
           </StyledSimulator>
-          <AuthorizationBtn onClick={launchSpaceCraft}>
-            Authorize
-          </AuthorizationBtn>
+          <PrimaryButton title="Authorize" onClick={launchSpaceCraft} />
         </>
       )}
       {authorised && <SimulatorTimer authorised={authorised} />}

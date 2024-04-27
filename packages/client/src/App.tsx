@@ -1,4 +1,6 @@
 import "./App.css";
+//add absoulte path
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,11 +21,12 @@ function App() {
         <Route
           path="/"
           element={<Listing missions={missions} status={status} />}
-          errorElement={<div>Something went wrong</div>}
+          errorElement={<>Something went wrong</>}
         />
         <Route
           path="/mission/:missionId"
           element={<Detail missions={missions} />}
+          errorElement={<>Something went wrong</>} //error element doesn't exist
         />
         <Route path="/simulator" element={<Simulator />} />
       </Routes>

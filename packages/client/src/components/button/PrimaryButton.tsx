@@ -17,6 +17,7 @@ export default function PrimaryButton({
   title: string;
   onClick?: () => void;
   icon?: React.ReactNode;
+  styles?: React.CSSProperties;
 }) {
   return (
     <StyledPrimaryButton onClick={onClick && onClick}>

@@ -1,9 +1,9 @@
-import Tile from "../components/tile/Tile";
+import Tile from "../components/data-display/Tile";
 import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
 import { Mission, Status } from "../types";
 import { useNavigate } from "react-router-dom";
-import { ReactEventHandler, useState } from "react";
+import { useState } from "react";
 import useFilter from "../hooks/useFilter";
 import PrimaryButton from "../components/button/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,9 +30,6 @@ const StyledInput = styled.input`
   padding: 1rem;
   width: 300px;
   border: 2px solid black;
-  &:focus-visible {
-    outline: none;
-  }
 `;
 
 const StyledSelect = styled.div`
@@ -47,15 +44,16 @@ const StyledSelect = styled.div`
     padding: 0.5rem;
     height: 100%;
     border: 2px solid black;
-    &:focus-visible {
-      outline: none;
-    }
+  }
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
 const StyledFilter = styled.div`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 `;
 
 export default function Listing({
@@ -121,9 +119,18 @@ export default function Listing({
         />
       </TileHeader>
       <TileWrapper>
-        {filteredMissions.map((mission) => (
-          <Tile key={mission.name} mission={mission} onClick={onTileClick} />
-        ))}
+        {filteredMissions.length > 0 ? (
+          filteredMissions.map((mission) => (
+            <Tile
+              key={mission.name}
+              mission={mission}
+              onClick={onTileClick}
+              tabIndex={0}
+            />
+          ))
+        ) : (
+          <h3>No missions found</h3>
+        )}
       </TileWrapper>
     </ContentLayout>
   );

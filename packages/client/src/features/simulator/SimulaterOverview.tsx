@@ -3,7 +3,7 @@ import { Spacecraft } from "../../types";
 import spaceCraftData from "./data/simulator.json";
 
 import styled from "styled-components";
-import Card from "../../components/tile/Card";
+import Card from "../../components/data-display/Card";
 
 const StyledSimulaterOverview = styled.div`
   display: flex;
@@ -21,8 +21,12 @@ const SimulatorGroup = styled.div`
 `;
 
 export default function SimulaterOverview() {
-  const { propulsion_system, communication_system, power_source } =
-    spaceCraftData;
+  const {
+    propulsion_system,
+    communication_system,
+    power_source,
+    spacecraft_name,
+  } = spaceCraftData;
 
   return (
     <StyledSimulaterOverview>
@@ -48,7 +52,7 @@ export default function SimulaterOverview() {
         />
       </SimulatorGroup>
 
-      <strong>Space Craft Vitals</strong>
+      <strong>{spacecraft_name}</strong>
     </StyledSimulaterOverview>
   );
 }
