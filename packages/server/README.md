@@ -1,37 +1,21 @@
-# React Auto Complete Full Stack App
+# MISSION-HUB
 
-This is a full-stack auto-complete application built with React for the client-side and Express for the server-side. The auto-complete feature allows users to search for items and see real-time results as they type.
+This is a full-stack auto-complete application built with React for the client-side and Express for the server-side.
 
-## Server Setup
+## Project Setup
 
-### Starting the Server
+1. Run `pnpm install` to install all the dependencies across the project
+2. Run `pnpm server` to start the server.
+3. Run `pnpm client` to start the server.
 
-1. Navigate to the `auto-complete-react-server` directory in your terminal.
-2. Run `pnpm install` to install all the dependencies.
-3. Run `pnpm dev` to start the server.
+The server will start running and then the client, and you'll be able to access it at the specified port.
 
-```bash
-cd auto-complete-react-server
-pnpm install
-pnpm dev
-```
+## Docker
 
-The server will start running, and you'll be able to access it at the specified port.
-
-## Server Dependencies
-
-- [Express](https://expressjs.com/): Web application framework for Node.js.
-- [cors](https://www.npmjs.com/package/cors): Middleware for enabling CORS (Cross-Origin Resource Sharing) in Express.
-- [pnpm](https://pnpm.io/): Package manager for JavaScript projects.
+1. `CD packages/server` and run `docker-compose build`
+2. `CD packages/client` and run `docker-compose build`
+3. `CD ../..` to be in the base location and run `docker-compose build`
 
 ## API Endpoints
 
-- **GET /api/items**: Fetches a list of items. Accepts an optional query parameter `searchTerm` for filtering the items based on search term.
-
-## Contributing
-
-Contributions are welcome! Feel free to submit pull requests or open issues for any bugs or feature requests.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+- **GET /api/missions**: Fetches a list of mission.
