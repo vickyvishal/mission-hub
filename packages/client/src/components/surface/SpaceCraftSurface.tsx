@@ -16,7 +16,7 @@ const StyledSpaceCraft = styled.div`
   align-items: center;
 `;
 
-export default function SpaceCraft({
+export function SpaceCraftSurface({
   src,
   title,
 }: {

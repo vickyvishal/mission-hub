@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import { Mission } from "../types";
 import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
-import CatalogueSurface from "../components/surface/CatalogueSurface";
-import SpaceCraft from "../components/surface/SpaceCraft";
+import { CatalogueSurface, SpaceCraftSurface } from "@/components/surface";
 
 const DetailBody = styled.div`
   display: flex;
@@ -32,7 +31,7 @@ export default function Detail({ missions }: { missions: Mission[] }) {
     >
       <DetailBody>
         <CatalogueSurface mission={mission} />
-        <SpaceCraft
+        <SpaceCraftSurface
           src={mission.spacecraft_image_src}
           title={mission.spacecraft}
         />

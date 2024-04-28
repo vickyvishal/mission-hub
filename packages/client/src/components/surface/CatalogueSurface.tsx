@@ -49,7 +49,7 @@ const ValueHeader = styled.th`
   }
 `;
 
-export default function CatalogueSurface({ mission }: { mission: Mission }) {
+export function CatalogueSurface({ mission }: { mission: Mission }) {
   const { image_src, ...rest } = mission;
   return (
     <StyledCatlogueSurface>
