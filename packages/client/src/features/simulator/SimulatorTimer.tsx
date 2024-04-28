@@ -21,18 +21,18 @@ const StyledContainer = styled.div`
   justify-content: center;
 `;
 
-export function SimulatorTimer({ authorised }: { authorised: boolean }) {
+export function SimulatorTimer({ isLauching }: { isLauching: boolean }) {
   const [time, setTime] = React.useState(10);
 
   React.useEffect(() => {
-    if (authorised && time > 0) {
+    if (isLauching && time > 0) {
       const interval = setInterval(() => {
         setTime(time - 1);
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [authorised, time]);
+  }, [isLauching, time]);
   return (
     <StyledContainer>
       <StyledSimilatorTimer>{time}</StyledSimilatorTimer>

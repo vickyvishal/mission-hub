@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Mission } from "../types";
 import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
@@ -13,11 +13,6 @@ const DetailBody = styled.div`
   & div {
     flex-grow: 1;
   }
-`;
-
-const BackBtn = styled.span`
-  padding: 0.5rem;
-  margin-bottom: 1rem;
 `;
 
 export default function Detail({ missions }: { missions: Mission[] }) {
@@ -35,10 +30,6 @@ export default function Detail({ missions }: { missions: Mission[] }) {
       subTitle={mission.description}
       titleImageSrc={mission.image_src}
     >
-      <Link to="/">
-        <BackBtn>Back</BackBtn>
-      </Link>
-
       <DetailBody>
         <CatalogueSurface mission={mission} />
         <SpaceCraft

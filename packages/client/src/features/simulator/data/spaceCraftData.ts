@@ -1,4 +1,4 @@
-import { SimulatorSpacecraft, Spacecraft } from "../../../types";
+import { SimulatorSpacecraft } from "../../../types";
 
 export const spaceCraftData: SimulatorSpacecraft = {
   spacecraft_name: "Aurora-IX",
@@ -14,7 +14,7 @@ export const spaceCraftData: SimulatorSpacecraft = {
       vitals: {
         value: 10,
         max: 12,
-        min: 7,
+        min: 6,
         unit: "KN",
       },
     },
@@ -22,8 +22,8 @@ export const spaceCraftData: SimulatorSpacecraft = {
       type: "Communication",
       vitals: {
         value: 250,
-        max: 300,
-        min: 200,
+        max: 270,
+        min: 150,
         unit: "AU",
       },
     },
@@ -31,7 +31,7 @@ export const spaceCraftData: SimulatorSpacecraft = {
       type: "Power",
       vitals: {
         value: 500,
-        max: 700,
+        max: 600,
         min: 350,
         unit: "kW",
       },

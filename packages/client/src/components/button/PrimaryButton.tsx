@@ -13,14 +13,20 @@ export default function PrimaryButton({
   title,
   onClick,
   icon,
+  disabled,
 }: {
   title: string;
   onClick?: () => void;
   icon?: React.ReactNode;
   styles?: React.CSSProperties;
+  disabled?: boolean;
 }) {
   return (
-    <StyledPrimaryButton onClick={onClick && onClick}>
+    <StyledPrimaryButton
+      onClick={onClick && onClick}
+      disabled={disabled}
+      style={disabled ? { background: "gray" } : {}}
+    >
       {title} {icon}
     </StyledPrimaryButton>
   );

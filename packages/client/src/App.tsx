@@ -1,12 +1,7 @@
 import "./App.css";
 //add absoulte path
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  createBrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
 import useMissions from "./hooks/useMissions";

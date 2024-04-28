@@ -12,7 +12,7 @@ const StyledTile = styled.div`
   width: 300px;
   background-color: #fff;
   cursor: pointer;
-  transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+  transition: box-shadow 0.3s ease;
 
   &:hover,
   &:focus {

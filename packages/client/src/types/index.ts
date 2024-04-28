@@ -73,7 +73,7 @@ export interface SimulatorSpacecraft {
   status: string;
 }
 
-interface CheckListData {
+export interface CheckListData {
   type: string;
   vitals: {
     value: number;

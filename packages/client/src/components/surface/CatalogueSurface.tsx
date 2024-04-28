@@ -1,4 +1,3 @@
-import React from "react";
 import { Mission } from "../../types";
 
 import styled from "styled-components";

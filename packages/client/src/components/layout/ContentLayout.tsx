@@ -12,23 +12,6 @@ type ContentLayoutProps = {
   titleImageSrc?: string;
 };
 
-const HeaderBackground = styled.div``;
-
-const HeaderTitle = styled.h3`
-  padding: 1rem;
-  font-size: 2rem;
-  color: black;
-  margin: 0;
-  display: flex;
-`;
-
-const HeaderImage = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
-`;
-
 const ContentLayoutHeader = styled.div`
   display: flex;
   gap: 1rem;

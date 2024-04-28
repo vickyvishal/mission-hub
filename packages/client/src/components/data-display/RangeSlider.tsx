@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faLock, faUnlock } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons";
 
 const StyledRangeSlider = styled.div`
   display: flex;
@@ -59,8 +59,11 @@ const InteractivePanel = styled.div`
   flex-grow: 2;
 `;
 
+const StyledRangeInput = styled.input`
+  cursor: pointer;
+`;
+
 export function RangeSlider({
-  maxRange,
   minRange,
   availableValue,
   requiredValue,
@@ -71,36 +74,32 @@ export function RangeSlider({
   minRange: number;
   availableValue: number;
   requiredValue: number;
-  handleLockedValue: (value: number) => void;
+  handleLockedValue: (value: number, isSet: boolean) => void;
   unit?: string;
 }) {
-  const [rangeValue, setRangeValue] = React.useState(requiredValue);
+  const [rangeValue, setRangeValue] = React.useState(minRange);
   const [isSet, setIsSet] = React.useState(false);
 
   useEffect(() => {
-    if (isSet) {
-      handleLockedValue(rangeValue);
-    }
-  }, [isSet, rangeValue, handleLockedValue]);
+    handleLockedValue(rangeValue, isSet);
+  }, [isSet]);
   return (
     <StyledRangeSlider>
       <InteractivePanel>
         <RequiredValue>{rangeValue}</RequiredValue>
-        <div>
-          <input
-            type="range"
-            min={minRange}
-            max={availableValue}
-            value={rangeValue}
-            onChange={
-              !isSet
-                ? (e: React.ChangeEvent<HTMLInputElement>) => {
-                    setRangeValue(Number(e.target.value));
-                  }
-                : undefined
-            }
-          ></input>
-        </div>
+        <StyledRangeInput
+          type="range"
+          min={minRange}
+          max={availableValue}
+          value={rangeValue}
+          onChange={
+            !isSet
+              ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                  setRangeValue(Number(e.target.value));
+                }
+              : undefined
+          }
+        ></StyledRangeInput>
 
         <SetButton
           onClick={() => {

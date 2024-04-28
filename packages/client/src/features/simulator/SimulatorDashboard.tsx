@@ -1,10 +1,18 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import styled from "styled-components";
-import { Card, RangeSlider } from "../../components/data-display";
-import { SimulatorSpacecraft, Spacecraft } from "../../types";
+import { Card, RangeSlider } from "@/components/data-display";
+import { CheckListData } from "../../types";
 import { spaceCraftData } from "./data/spaceCraftData";
 import Footer from "./component/Footer";
+import PrimaryButton from "../../components/button/PrimaryButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faExclamationCircle,
+  faClock,
+} from "@fortawesome/free-solid-svg-icons";
+import { createRandomCheckListData } from "./utils";
 
 const StyledSimulatorDashboard = styled.div`
   display: flex;
@@ -19,32 +27,61 @@ const SimulatorGroup = styled.div`
   gap: 1rem;
 `;
 
-console.log(spaceCraftData);
+const { checkListData } = createRandomCheckListData();
 
-const createRandomCheckListData = (): SimulatorSpacecraft => {
-  const randomSpaceCraftData = spaceCraftData.checkListData.map((data) => {
-    const randomValue = Math.floor(
-      Math.random() * (data.vitals.max - data.vitals.min) + data.vitals.min
-    );
-    return {
-      ...data,
-      vitals: {
-        ...data.vitals,
-        simulatorValue: randomValue,
-      },
-    };
-  });
-  return {
-    ...spaceCraftData,
-    checkListData: randomSpaceCraftData,
+export function SimulatorDashboard({
+  launchSpaceCraft,
+}: {
+  launchSpaceCraft: () => void;
+}) {
+  const [lockedValues, setLockedValues] = useState<CheckListData[]>([]);
+  const [launchClearance, setLaunchClearance] = useState<
+    "partial" | "full" | "none"
+  >("none");
+
+  const handleLockedValue = (data: CheckListData, isSet: boolean) => {
+    if (isSet) {
+      const newLockedValues = lockedValues.filter(
+        (lockedValue) => lockedValue.type !== data.type
+      );
+      setLockedValues([...newLockedValues, data]);
+    }
+    if (!isSet) {
+      const newLockedValues = lockedValues.filter(
+        (lockedValue) => lockedValue.type !== data.type
+      );
+      setLockedValues(newLockedValues);
+    }
   };
-};
 
-export default function SimulatorDashboard() {
-  const { checkListData } = createRandomCheckListData();
+  useEffect(() => {
+    const verifyCheckListData = (data: CheckListData[]) => {
+      const isAllValuesLocked = data.length === checkListData.length;
 
-  const handleLockedValue = (value: number) => {
-    console.log(value);
+      const isAllValuesCorrect = data.every((lockedValue) => {
+        const { vitals } = lockedValue;
+        const { value, simulatorValue } = vitals;
+        return value >= simulatorValue!;
+      });
+
+      if (isAllValuesLocked && isAllValuesCorrect) {
+        console.log("full");
+        setLaunchClearance("full");
+      }
+      if (isAllValuesLocked && !isAllValuesCorrect) {
+        setLaunchClearance("partial");
+      }
+      if (!isAllValuesLocked) {
+        setLaunchClearance("none");
+      }
+    };
+    verifyCheckListData(lockedValues);
+  }, [lockedValues]);
+
+  const handleAuthorize = () => {
+    if (launchClearance === "partial" || launchClearance === "full") {
+      launchSpaceCraft();
+    }
   };
 
   return (
@@ -58,13 +95,35 @@ export default function SimulatorDashboard() {
             availableValue={data.vitals.value}
             requiredValue={data.vitals.simulatorValue!}
             unit={data.vitals.unit}
-            handleLockedValue={handleLockedValue}
+            handleLockedValue={(val, isSet) =>
+              handleLockedValue(
+                {
+                  ...data,
+                  vitals: { ...data.vitals, value: val },
+                },
+                isSet
+              )
+            }
           />
         </SimulatorGroup>
       ))}
       <Footer
         title={spaceCraftData.spacecraft_name}
         subtitle={"Adjust the vitals"}
+      />
+      <PrimaryButton
+        title="Authorize"
+        onClick={handleAuthorize}
+        disabled={launchClearance === "none"}
+        icon={
+          launchClearance === "partial" ? (
+            <FontAwesomeIcon icon={faExclamationCircle} />
+          ) : launchClearance === "full" ? (
+            <FontAwesomeIcon icon={faCheck} />
+          ) : (
+            <FontAwesomeIcon icon={faClock} />
+          )
+        }
       />
     </StyledSimulatorDashboard>
   );

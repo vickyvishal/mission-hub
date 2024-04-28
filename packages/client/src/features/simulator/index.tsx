@@ -1,3 +1,2 @@
-export * from "./SimulaterOverview";
-export * from "./SimulatorCheckList";
+export * from "./SimulatorDashboard";
 export * from "./SimulatorTimer";

@@ -2,7 +2,7 @@ import { Tile } from "../components/data-display";
 import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
 import { Mission, Status } from "../types";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useFilter from "../hooks/useFilter";
 import PrimaryButton from "../components/button/PrimaryButton";
@@ -28,6 +28,10 @@ const StyledInput = styled.input`
   padding: 1rem;
   width: 300px;
   border: 2px solid black;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const StyledSelect = styled.div`
@@ -42,9 +46,6 @@ const StyledSelect = styled.div`
     padding: 0.5rem;
     height: 100%;
     border: 2px solid black;
-  }
-  @media screen and (max-width: 768px) {
-    display: none;
   }
 `;
 
