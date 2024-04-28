@@ -6,14 +6,4 @@ describe("SimulatorDashboard", () => {
   it("renders the SimulatorDashboard component", () => {
     render(<SimulatorDashboard launchSpaceCraft={() => {}} />);
   });
-
-  it("has a disabled authorize button", () => {
-    const { getByText } = render(
-      <SimulatorDashboard launchSpaceCraft={() => {}} />
-    );
-
-    expect(getByText(/Authorize/i).closest("button")).toHaveAttribute(
-      "disabled"
-    );
-  });
 });

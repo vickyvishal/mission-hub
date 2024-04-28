@@ -89,19 +89,22 @@ export function RangeSlider({
         <RequiredValue>{rangeValue}</RequiredValue>
         <StyledRangeInput
           type="range"
+          aria-label="range-input"
           min={minRange}
           max={availableValue}
           value={rangeValue}
+          disabled={isSet}
           onChange={
-            !isSet
-              ? (e: React.ChangeEvent<HTMLInputElement>) => {
-                  setRangeValue(Number(e.target.value));
+            isSet
+              ? () => {}
+              : (e) => {
+                  setRangeValue(parseInt(e.target.value));
                 }
-              : undefined
           }
         ></StyledRangeInput>
 
         <SetButton
+          data-testid="set-button"
           onClick={() => {
             setIsSet((val) => !val);
           }}
@@ -115,10 +118,10 @@ export function RangeSlider({
         </SetButton>
       </InteractivePanel>
       <InfoPanel>
-        <p>
+        <p data-testid="required-value">
           Required: {requiredValue} <span>{unit}</span>
         </p>
-        <p>
+        <p data-testid="available-value">
           Available: {availableValue} <span>{unit}</span>
         </p>
       </InfoPanel>
