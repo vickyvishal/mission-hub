@@ -21,11 +21,7 @@ const StyledContainer = styled.div`
   justify-content: center;
 `;
 
-export default function SimulatorTimer({
-  authorised,
-}: {
-  authorised: boolean;
-}) {
+export function SimulatorTimer({ authorised }: { authorised: boolean }) {
   const [time, setTime] = React.useState(10);
 
   React.useEffect(() => {

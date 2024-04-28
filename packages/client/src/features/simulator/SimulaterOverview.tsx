@@ -1,9 +1,8 @@
-import React from "react";
 import { Spacecraft } from "../../types";
-import spaceCraftData from "./data/simulator.json";
 
 import styled from "styled-components";
-import Card from "../../components/data-display/Card";
+import { Card } from "../../components/data-display";
+import Footer from "./component/Footer";
 
 const StyledSimulaterOverview = styled.div`
   display: flex;
@@ -15,12 +14,18 @@ const StyledSimulaterOverview = styled.div`
 
 const SimulatorGroup = styled.div`
   display: flex;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
   width: 300px;
 `;
 
-export default function SimulaterOverview() {
+export function SimulaterOverview({
+  spaceCraftData,
+}: // spaceCraftData,
+{
+  spaceCraftData: Spacecraft;
+}) {
   const {
     propulsion_system,
     communication_system,
@@ -52,7 +57,7 @@ export default function SimulaterOverview() {
         />
       </SimulatorGroup>
 
-      <strong>{spacecraft_name}</strong>
+      <Footer title={spacecraft_name} />
     </StyledSimulaterOverview>
   );
 }

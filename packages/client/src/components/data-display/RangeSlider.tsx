@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faLock, faUnlock } from "@fortawesome/free-solid-svg-icons";
 
 const StyledRangeSlider = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ const buttonColor: { [key: string]: string } = {
   gray: "gray",
 };
 
-const AuthoriseButton = styled.button`
+const SetButton = styled.button`
   height: 70%;
   background-color: ${(props) => buttonColor[props.color!] ?? "blue"};
   border-radius: 20px;
@@ -59,22 +59,29 @@ const InteractivePanel = styled.div`
   flex-grow: 2;
 `;
 
-export default function RangeSlider({
-  //better name for this component would be RangeSlider
+export function RangeSlider({
   maxRange,
   minRange,
   availableValue,
   requiredValue,
   unit,
+  handleLockedValue,
 }: {
   maxRange: number;
   minRange: number;
   availableValue: number;
   requiredValue: number;
+  handleLockedValue: (value: number) => void;
   unit?: string;
 }) {
   const [rangeValue, setRangeValue] = React.useState(requiredValue);
   const [isSet, setIsSet] = React.useState(false);
+
+  useEffect(() => {
+    if (isSet) {
+      handleLockedValue(rangeValue);
+    }
+  }, [isSet, rangeValue, handleLockedValue]);
   return (
     <StyledRangeSlider>
       <InteractivePanel>
@@ -95,7 +102,7 @@ export default function RangeSlider({
           ></input>
         </div>
 
-        <AuthoriseButton
+        <SetButton
           onClick={() => {
             setIsSet((val) => !val);
           }}
@@ -105,8 +112,8 @@ export default function RangeSlider({
               : "green"
           }
         >
-          <FontAwesomeIcon icon={isSet ? faLock : faCheck} />
-        </AuthoriseButton>
+          <FontAwesomeIcon icon={isSet ? faLock : faUnlock} />
+        </SetButton>
       </InteractivePanel>
       <InfoPanel>
         <p>

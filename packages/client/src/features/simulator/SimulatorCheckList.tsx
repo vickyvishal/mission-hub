@@ -1,7 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import RangeSlider from "../../components/data-display/RangeSlider";
-import spaceCraftData from "./data/simulator.json";
+import { RangeSlider } from "../../components/data-display";
+import Footer from "./component/Footer";
+import { Spacecraft } from "../../types";
 
 const StyledSimulatorCheckList = styled.div`
   display: flex;
@@ -19,42 +19,23 @@ const SimulatorGroup = styled.div`
   width: 300px;
 `;
 
-const createRandomCheckListData = () => {
-  const propulsion_system_thrust = Math.floor(
-    Math.random() * (300 - 150) + 150
-  );
-  const communication_system_range = Math.floor(Math.random() * (12 - 7) + 7);
-  const power_source_output = Math.floor(Math.random() * (700 - 350) + 350);
-  return {
-    propulsion_system: {
-      type: "Nucelear",
-      thrust: {
-        value: propulsion_system_thrust,
-        unit: "kN",
-      },
-    },
-    communication_system: {
-      type: "Long Range",
-      range: {
-        value: communication_system_range,
-        unit: "AU",
-      },
-    },
-    power_source: {
-      type: "Solar",
-      output: {
-        value: power_source_output,
-        unit: "KW",
-      },
-    },
-  };
-};
-
-export default function SimulatorCheckList() {
+export function SimulatorCheckList({
+  checklistData,
+  spaceCraftData,
+  handleLockedValue,
+}: {
+  checklistData: Pick<
+    Spacecraft,
+    "propulsion_system" | "communication_system" | "power_source"
+  >;
+  spaceCraftData: Spacecraft;
+  handleLockedValue: (value: number, entry: string) => void;
+}) {
   const { propulsion_system, communication_system, power_source } =
-    createRandomCheckListData();
+    checklistData;
 
   return (
+    //the range slider could be mapped from an array, including the overview Simulator Overview
     <StyledSimulatorCheckList>
       <SimulatorGroup>
         <RangeSlider
@@ -63,6 +44,9 @@ export default function SimulatorCheckList() {
           maxRange={300}
           minRange={150}
           unit={propulsion_system.thrust.unit}
+          handleLockedValue={(val) =>
+            handleLockedValue(val, "propulsion_system")
+          }
         />
       </SimulatorGroup>
       <SimulatorGroup>
@@ -72,6 +56,9 @@ export default function SimulatorCheckList() {
           maxRange={12}
           minRange={7}
           unit={communication_system.range.unit}
+          handleLockedValue={(val) =>
+            handleLockedValue(val, "communication_system")
+          }
         />
       </SimulatorGroup>
       <SimulatorGroup>
@@ -81,9 +68,10 @@ export default function SimulatorCheckList() {
           maxRange={700}
           minRange={350}
           unit={power_source.output.unit}
+          handleLockedValue={(val) => handleLockedValue(val, "power_source")}
         />
       </SimulatorGroup>
-      <strong>Space Craft Vitals</strong>
+      <Footer title={"Space Craft Vitals"} />
     </StyledSimulatorCheckList>
   );
 }

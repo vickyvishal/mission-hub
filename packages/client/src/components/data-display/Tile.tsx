@@ -87,7 +87,7 @@ export interface TileProps {
   tabIndex: number;
 }
 
-export default function Tile({ mission, onClick, tabIndex }: TileProps) {
+export function Tile({ mission, onClick, tabIndex }: TileProps) {
   const { name, progress_percentage, countries, launch_date } = mission;
   return (
     <StyledTile

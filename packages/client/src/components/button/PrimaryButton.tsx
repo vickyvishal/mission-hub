@@ -21,9 +21,7 @@ export default function PrimaryButton({
 }) {
   return (
     <StyledPrimaryButton onClick={onClick && onClick}>
-      {title}
-
-      {icon}
+      {title} {icon}
     </StyledPrimaryButton>
   );
 }

@@ -1,27 +1,25 @@
-import Tile from "../components/data-display/Tile";
+import { Tile } from "../components/data-display";
 import ContentLayout from "../components/layout/ContentLayout";
 import styled from "styled-components";
 import { Mission, Status } from "../types";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useFilter from "../hooks/useFilter";
 import PrimaryButton from "../components/button/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRocket } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 const TileWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 1rem;
   margin-top: 1rem;
 `;
 
 const TileHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1rem;
   gap: 1rem;
   width: 100%;
 `;
@@ -56,6 +54,13 @@ const StyledFilter = styled.div`
   flex-wrap: wrap;
 `;
 
+const StyledPagination = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
 export default function Listing({
   missions,
   status,
@@ -65,6 +70,8 @@ export default function Listing({
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+
   const navigate = useNavigate();
 
   const [filteredMissions] = useFilter({
@@ -100,7 +107,7 @@ export default function Listing({
             <select
               id="status-filter"
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                setStatusFilter(e.target.value as Status)
+                setStatusFilter(e.target.value)
               }
               value={statusFilter}
             >
@@ -112,26 +119,26 @@ export default function Listing({
             </select>
           </StyledSelect>
         </StyledFilter>
-        <PrimaryButton
-          title="Simulation"
-          onClick={() => navigate("/simulator")}
-          icon={<FontAwesomeIcon icon={faRocket} />}
-        />
       </TileHeader>
       <TileWrapper>
-        {filteredMissions.length > 0 ? (
-          filteredMissions.map((mission) => (
-            <Tile
-              key={mission.name}
-              mission={mission}
-              onClick={onTileClick}
-              tabIndex={0}
-            />
-          ))
-        ) : (
-          <h3>No missions found</h3>
-        )}
+        {filteredMissions.slice(0, currentPage * 10).map((mission) => (
+          <Tile
+            key={mission.name}
+            mission={mission}
+            onClick={onTileClick}
+            tabIndex={0}
+          />
+        ))}
       </TileWrapper>
+      {currentPage * 10 < filteredMissions.length && (
+        <StyledPagination>
+          <PrimaryButton
+            title="Show More"
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            icon={<FontAwesomeIcon icon={faArrowDown} />}
+          />
+        </StyledPagination>
+      )}
     </ContentLayout>
   );
 }

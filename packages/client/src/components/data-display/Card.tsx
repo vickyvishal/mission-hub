@@ -9,11 +9,11 @@ const StyledCard = styled.div`
   background-color: #fff;
   border: 2px solid gray;
   height: 100px;
-  width: 100px;
+  width: 200px;
   font-weight: bold;
 `;
 
-export default function Card({
+export function Card({
   value,
   unit,
 }: {
