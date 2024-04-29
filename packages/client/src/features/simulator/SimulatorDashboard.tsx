@@ -32,7 +32,7 @@ const { checkListData } = createRandomCheckListData();
 export function SimulatorDashboard({
   launchSpaceCraft,
 }: {
-  launchSpaceCraft: () => void;
+  launchSpaceCraft: (checkListData: CheckListData[]) => void;
 }) {
   const [lockedValues, setLockedValues] = useState<CheckListData[]>([]);
   const [launchClearance, setLaunchClearance] = useState<
@@ -40,16 +40,13 @@ export function SimulatorDashboard({
   >("none");
 
   const handleLockedValue = (data: CheckListData, isSet: boolean) => {
+    const newLockedValues = lockedValues.filter(
+      (lockedValue) => lockedValue.type !== data.type
+    );
     if (isSet) {
-      const newLockedValues = lockedValues.filter(
-        (lockedValue) => lockedValue.type !== data.type
-      );
       setLockedValues([...newLockedValues, data]);
     }
     if (!isSet) {
-      const newLockedValues = lockedValues.filter(
-        (lockedValue) => lockedValue.type !== data.type
-      );
       setLockedValues(newLockedValues);
     }
   };
@@ -80,7 +77,7 @@ export function SimulatorDashboard({
 
   const handleAuthorize = () => {
     if (launchClearance === "partial" || launchClearance === "full") {
-      launchSpaceCraft();
+      launchSpaceCraft(lockedValues);
     }
   };
 

@@ -1,23 +1,24 @@
 import ContentLayout from "@/components/layout/ContentLayout";
 
 import { SimulatorTimer, SimulatorDashboard } from "@/features/simulator";
+import { CheckListData } from "@/types";
 import { useState } from "react";
 
 export function Simulator() {
-  const [isLauching, setIsLaunching] = useState(false);
+  const [launchData, setLaunchData] = useState<CheckListData[]>([]);
 
-  const launchSpaceCraft = () => {
-    setIsLaunching(true);
+  const launchSpaceCraft = (lockedValue: CheckListData[]) => {
+    setLaunchData(lockedValue);
   };
 
   return (
     <ContentLayout title="Simulator">
-      {!isLauching ? (
+      {launchData.length === 0 ? (
         <>
           <SimulatorDashboard launchSpaceCraft={launchSpaceCraft} />
         </>
       ) : (
-        <SimulatorTimer isLauching={isLauching} />
+        <SimulatorTimer launchData={launchData} />
       )}
     </ContentLayout>
   );
