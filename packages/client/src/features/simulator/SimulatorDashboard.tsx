@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import { Card, RangeSlider } from "@/components/data-display";
-import { CheckListData } from "../../types";
+import { CheckListData } from "@/types";
 import { spaceCraftData } from "./data/spaceCraftData";
 import Footer from "./component/Footer";
-import PrimaryButton from "../../components/button/PrimaryButton";
+import PrimaryButton from "@/components/button/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,

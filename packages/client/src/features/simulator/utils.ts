@@ -1,4 +1,4 @@
-import { SimulatorSpacecraft } from "../../types";
+import { SimulatorSpacecraft } from "@/types";
 import { spaceCraftData } from "./data/spaceCraftData";
 
 export const createRandomCheckListData = (): SimulatorSpacecraft => {

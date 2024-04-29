@@ -1,11 +1,11 @@
-import { Tile } from "../components/data-display";
-import ContentLayout from "../components/layout/ContentLayout";
+import { Tile } from "@/components/data-display";
+import ContentLayout from "@/components/layout/ContentLayout";
 import styled from "styled-components";
-import { Mission, Status } from "../types";
+import { Mission, Status } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useFilter from "../hooks/useFilter";
-import PrimaryButton from "../components/button/PrimaryButton";
+import useFilter from "@/hooks/useFilter";
+import PrimaryButton from "@/components/button/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -62,7 +62,7 @@ const StyledPagination = styled.div`
   margin-top: 1rem;
 `;
 
-export default function Listing({
+export function Listing({
   missions,
   status,
 }: {

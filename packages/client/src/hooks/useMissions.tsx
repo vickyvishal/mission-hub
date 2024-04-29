@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Mission, Status } from "../types";
+import { Mission, Status } from "@/types";
 
 export default function useMissions() {
   const [missions, setMissions] = useState<Mission[]>([]);

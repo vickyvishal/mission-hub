@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { Mission } from "../types";
-import ContentLayout from "../components/layout/ContentLayout";
+import { Mission } from "@/types";
+import ContentLayout from "@/components/layout/ContentLayout";
 import styled from "styled-components";
 import { CatalogueSurface, SpaceCraftSurface } from "@/components/surface";
 
@@ -14,7 +14,7 @@ const DetailBody = styled.div`
   }
 `;
 
-export default function Detail({ missions }: { missions: Mission[] }) {
+export function Detail({ missions }: { missions: Mission[] }) {
   const { missionId } = useParams();
   if (!missions.length) {
     return;

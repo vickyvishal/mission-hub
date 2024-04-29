@@ -1,11 +1,8 @@
 import "./App.css";
-//add absoulte path
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Listing from "./pages/Listing";
-import Detail from "./pages/Detail";
-import useMissions from "./hooks/useMissions";
-import Simulator from "./pages/Simulator";
+import { Listing, Detail, Simulator } from "@/pages/";
+import useMissions from "@/hooks/useMissions";
 
 function App() {
   const { missions, status } = useMissions();

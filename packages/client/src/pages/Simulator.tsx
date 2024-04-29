@@ -3,7 +3,7 @@ import ContentLayout from "@/components/layout/ContentLayout";
 import { SimulatorTimer, SimulatorDashboard } from "@/features/simulator";
 import { useState } from "react";
 
-export default function Simulator() {
+export function Simulator() {
   const [isLauching, setIsLaunching] = useState(false);
 
   const launchSpaceCraft = () => {

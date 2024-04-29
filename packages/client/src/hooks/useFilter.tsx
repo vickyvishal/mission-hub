@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Mission } from "../types";
+import { Mission } from "@/types";
 
 export default function useFilter({
   data,
