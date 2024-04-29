@@ -97,6 +97,7 @@ export function Listing({
       <TileHeader>
         <StyledFilter>
           <StyledInput
+            role="search"
             type="text"
             placeholder="Search..."
             value={searchTerm}
@@ -104,8 +105,10 @@ export function Listing({
               setSearchTerm(e.target.value)
             }
           />
+
           <StyledSelect>
             <select
+              role="filter"
               id="status-filter"
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 setStatusFilter(e.target.value)
