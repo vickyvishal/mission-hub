@@ -48,7 +48,7 @@ export function SimulatorTimer({
     if (launchData && time > 0) {
       const interval = setInterval(() => {
         setTime(time - 1);
-      }, 10);
+      }, 1000);
 
       return () => clearInterval(interval);
     }
