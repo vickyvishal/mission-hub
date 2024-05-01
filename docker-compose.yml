@@ -2,11 +2,11 @@ version: "3.8"
 
 services:
   backend:
-    build: ./backend
+    build: ./packages/server
     ports:
       - "3000:3000"
 
   frontend:
-    build: ./frontend
+    build: ./packages/client
     ports:
       - "5173:5173"

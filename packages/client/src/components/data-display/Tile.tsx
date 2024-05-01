@@ -12,6 +12,7 @@ const StyledTile = styled.div`
   width: 300px;
   background-color: #fff;
   cursor: pointer;
+  overflow: auto;
   transition: box-shadow 0.3s ease;
 
   &:hover,
@@ -32,9 +33,7 @@ const Title = styled.h3`
   font-weight: bold;
   color: blue;
   height: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
   cursor: pointer;
 `;
 
