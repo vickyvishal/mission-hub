@@ -13,10 +13,10 @@ The server will start running and then the client, and you'll be able to access 
 
 ## Docker
 
-1. `CD packages/server` and run `docker-compose build`
-2. `CD packages/client` and run `docker-compose build`
-3. `CD ../..` to be in the base location and run `docker-compose build`
+1. Run `docker-compose up`
 
 ## API Endpoints
 
 - **GET /api/missions**: Fetches a list of mission.
+- 
+- **GET /api/events**: Event streaming random space news
