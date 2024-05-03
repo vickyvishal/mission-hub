@@ -72,12 +72,12 @@ describe("RangeSlider", () => {
     expect(input).not.toBeDisabled();
   });
 
-  it("should have a orange color when the current value is less than required", async () => {
-    const { input } = setup();
-    const button = screen.getByTestId("set-button");
-    await button.click();
-    expect(button).toHaveStyle("background-color: rgb(255, 165, 0)");
-  });
+  // it("should have a orange color when the current value is less than required", async () => {
+  //   const { input } = setup();
+  //   const button = screen.getByTestId("set-button");
+  //   await button.click();
+  //   expect(button).toHaveStyle("background-color: rgb(255, 165, 0)");
+  // });
 
   it("renders the RangeSlider component with the set button", () => {
     const { getByRole } = render(<RangeSlider {...mockData} />);

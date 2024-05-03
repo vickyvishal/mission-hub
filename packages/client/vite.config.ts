@@ -7,13 +7,17 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
 
   server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:3000",
+    //     changeOrigin: true,
+    //     rewrite: (path: string) => path.replace(/^\/api/, ""),
+    //   },
+    // },
+    port: 8080,
+    strictPort: true,
+    host: true,
+    origin: "http://0.0.0.0:8080",
   },
   test: {
     globals: true,

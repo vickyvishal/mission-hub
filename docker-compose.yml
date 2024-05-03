@@ -1,12 +1,14 @@
-version: "3.8"
-
 services:
-  backend:
+  client:
+    build: ./packages/client
+    container_name: client_c
+    ports:
+      - "8080:8080"
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+
+  server:
     build: ./packages/server
+    container_name: server_c
     ports:
       - "3000:3000"
-
-  frontend:
-    build: ./packages/client
-    ports:
-      - "5173:5173"

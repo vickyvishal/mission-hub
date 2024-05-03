@@ -6,6 +6,7 @@
   "scripts": {
     "client": "pnpm --filter \"client\" run dev",
     "server": "pnpm --filter \"server\" run dev",
+    "run-app": "pnpm run client & pnpm run server",
     "test": "pnpm --filter \"client\" run test"
   },
   "keywords": [],

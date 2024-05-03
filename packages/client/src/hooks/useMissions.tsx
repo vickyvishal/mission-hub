@@ -16,7 +16,7 @@ export default function useMissions() {
 
     const fetchMissions = async () => {
       try {
-        const response = await fetch("/api/missions");
+        const response = await fetch("http://localhost:3000/missions");
         const data = await response.json();
         setMissions(data);
         setStatus("idle");
