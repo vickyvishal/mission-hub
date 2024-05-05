@@ -14,7 +14,7 @@ export function LiveUpdate() {
     "Recent updates will appear here."
   );
   useEffect(() => {
-    const event = new EventSource("http://localhost:3000/events");
+    const event = new EventSource("/api/events");
 
     event.onmessage = (event) => {
       setUpdates(event.data);

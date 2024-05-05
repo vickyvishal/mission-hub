@@ -16,7 +16,7 @@ function App() {
 
     {
       path: "/mission/:missionId",
-      element: <Detail missions={missions} />,
+      element: <Detail missions={missions} status={status} />,
       errorElement: <ErrorPage />,
     },
     {

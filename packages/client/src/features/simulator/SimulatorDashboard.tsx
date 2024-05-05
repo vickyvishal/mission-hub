@@ -89,6 +89,7 @@ export function SimulatorDashboard({
           <RangeSlider
             minRange={data.vitals.min}
             maxRange={data.vitals.max}
+            data-testid="range-input"
             availableValue={data.vitals.value}
             requiredValue={data.vitals.simulatorValue!}
             unit={data.vitals.unit}

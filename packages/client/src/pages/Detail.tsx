@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Mission } from "@/types";
+import { Mission, Status } from "@/types";
 import ContentLayout from "@/components/layout/ContentLayout";
 import styled from "styled-components";
 import { CatalogueSurface, SpaceCraftSurface } from "@/components/surface";
@@ -16,15 +16,28 @@ const DetailBody = styled.div`
   }
 `;
 
-export function Detail({ missions }: { missions: Mission[] }) {
+export function Detail({
+  missions,
+  status,
+}: {
+  missions: Mission[];
+  status: Status;
+}) {
   const { missionId } = useParams();
+  if (status === "loading") {
+    return <ContentLayout title="Missions">Loading...</ContentLayout>;
+  }
+
+  if (status === "error") {
+    return <ContentLayout title="Missions">Error!</ContentLayout>;
+  }
 
   const mission = missions.filter(
     (mission) => mission.id == Number(missionId)
   )[0];
 
-  if (!missions.length) {
-    return;
+  if (!mission) {
+    return <ContentLayout title="Missions">Mission not found!</ContentLayout>;
   }
 
   return (
