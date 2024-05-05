@@ -18,5 +18,4 @@ The server will start running and then the client, and you'll be able to access 
 ## API Endpoints
 
 - **GET /api/missions**: Fetches a list of mission.
-- 
 - **GET /api/events**: Event streaming random space news
