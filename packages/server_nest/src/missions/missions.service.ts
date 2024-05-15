@@ -12,7 +12,20 @@ export class MissionsService {
     return this.missions;
   }
   findOne(id: string) {
-    const mission = this.missions.find((mission) => mission.id === Number(id));
+    const mission = this.missions.find((mission) => mission.id === +id);
     return mission;
+  }
+  update(
+    id: string,
+    { name, description }: { name: string; description: string },
+  ) {
+    const missionToUpdate = this.missions.map((e) => e.id).indexOf(+id);
+    this.missions[missionToUpdate] = {
+      ...this.missions[missionToUpdate],
+      name,
+      description,
+    };
+
+    return this.missions[missionToUpdate];
   }
 }

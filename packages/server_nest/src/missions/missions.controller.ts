@@ -34,8 +34,11 @@ export class MissionsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() missionUpdate: {}) {
-    return { id, ...missionUpdate };
+  update(
+    @Param('id') id: string,
+    @Body() { name, description }: { name: string; description: string },
+  ) {
+    return this.missionService.update(id, { name, description });
   }
 
   @Delete(':id')
